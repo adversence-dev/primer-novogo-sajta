@@ -1,0 +1,210 @@
+/* Psychology Online — подарочный черновик. Её цвета, её шрифт (Commissioner), её тексты. */
+:root{
+  --cream:#fffaf5; --paper:#fff; --ink:#4a3838; --soft:#7a6262; --line:#eedfd2;
+  --plum:#6d5050; --plum-d:#5a4141; --sand:#e1c9b4; --sand-d:#cdae94; --blush:#f7ede4; --lilac:#f3ecef;
+  --sans:Commissioner, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --r:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+h1,h2,h3{font-weight:500;line-height:1.2;margin:0;letter-spacing:-.015em}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.narrow{max-width:760px;margin:0 auto}
+section{padding:84px 0}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 30px;border-radius:999px;background:var(--plum);color:#fff;text-decoration:none;font:500 16px/1.2 var(--sans);letter-spacing:.01em;border:0;cursor:pointer;transition:background .25s, transform .25s, box-shadow .25s}
+.btn:hover{background:var(--plum-d);transform:translateY(-1px);box-shadow:0 12px 26px -14px rgba(109,80,80,.75)}
+.btn svg{flex:none}
+.btn.light{background:#fff;color:var(--plum)}
+.btn.light:hover{background:var(--blush)}
+
+/* шапка: её песочная полоса */
+header{position:sticky;top:0;z-index:30;background:var(--sand);transition:box-shadow .3s}
+header.scrolled{box-shadow:0 8px 24px -18px rgba(74,56,56,.5)}
+.bar{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;height:72px}
+.logo{justify-self:center;text-decoration:none;color:#fff;font:600 15px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;white-space:nowrap}
+.icon-btn{width:44px;height:44px;display:grid;place-items:center;background:none;border:0;color:var(--ink);cursor:pointer;text-decoration:none}
+.menu{position:fixed;inset:72px 0 auto 0;background:var(--cream);border-bottom:1px solid var(--line);transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .25s, transform .25s;z-index:29}
+.menu.open{opacity:1;transform:none;pointer-events:auto}
+.menu ul{list-style:none;margin:0 auto;padding:14px 24px 26px;max-width:1180px}
+.menu a{display:flex;justify-content:space-between;padding:15px 0;border-bottom:1px solid var(--line);text-decoration:none;font-size:18px}
+.menu a::after{content:"→";color:var(--sand-d)}
+@media (min-width:1200px){
+  .bar{grid-template-columns:auto 1fr auto;gap:28px}
+  .logo{justify-self:start;order:-1}
+  .menu{position:static;transform:none;opacity:1;pointer-events:auto;background:none;border:0}
+  .menu ul{display:flex;gap:22px;padding:0;justify-content:flex-end}
+  .menu a{border:0;padding:0;font-size:14.5px;color:var(--ink);white-space:nowrap}
+  .menu a::after{display:none}
+  .menu a:hover{color:var(--plum)}
+  .burger{display:none}
+}
+
+/* первый экран главной: её фото, её слова */
+.hero{position:relative;overflow:hidden;min-height:min(760px,calc(100vh - 72px));display:flex;align-items:center;background:#efe6ea}
+.hero picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:64% 28%}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(255,250,245,.95) 0%,rgba(255,250,245,.86) 32%,rgba(255,250,245,.2) 56%,rgba(255,250,245,0) 68%)}
+.hero-in{position:relative;z-index:2;width:100%;padding-top:56px;padding-bottom:64px}
+.hero-text{max-width:640px}
+.hero-text::before{content:"";display:block;width:64px;height:3px;border-radius:2px;background:var(--sand);margin:0 0 26px}
+.hero h1 .nb{white-space:nowrap}
+.hero h1{font-size:clamp(36px,4vw,58px);line-height:1.08;margin:0 0 24px;color:var(--plum)}
+.hero p{max-width:30em;margin:0 0 14px;font-size:clamp(17px,1.4vw,19px);color:var(--ink)}
+.hero .sign{font-size:clamp(19px,1.6vw,22px);font-style:italic;color:var(--plum);margin:26px 0 30px}
+@media (max-width:860px){
+  .hero{min-height:auto;background:var(--cream);align-items:stretch}
+  .hero picture img{object-position:100% 0}
+  .hero::before{background:linear-gradient(180deg,rgba(255,253,251,.64) 0%,rgba(255,253,251,.48) 45%,rgba(255,253,251,.6) 82%,var(--cream) 100%)}
+  .hero-in{padding:44px 24px 48px;text-align:center}
+  .hero-text{max-width:none}
+  .hero-text::before{margin:0 auto 22px}
+  .hero h1{font-size:min(8.6vw,34px)}
+  .hero p{font-style:italic;max-width:22em;margin-left:auto;margin-right:auto}
+  .hero .btn{width:100%}
+}
+
+/* её заметка «Важный момент!» */
+.notice{position:fixed;left:16px;right:16px;bottom:16px;z-index:40;max-width:560px;margin:0 auto;display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px 14px 20px;box-shadow:0 24px 50px -28px rgba(74,56,56,.55);font-size:15px;line-height:1.45}
+.notice.hide{display:none}
+.notice a.more{flex:none;padding:9px 16px;border-radius:999px;background:var(--blush);text-decoration:none;font-weight:500;color:var(--plum)}
+.notice button{flex:none;background:none;border:0;font-size:22px;line-height:1;color:var(--soft);cursor:pointer;padding:4px}
+
+/* заголовок блока */
+.title{font-size:clamp(28px,3.4vw,42px);color:var(--plum);max-width:780px}
+.intro{color:var(--soft);font-size:18px;max-width:640px;margin:16px 0 0}
+
+/* темы: её фото, её названия — строками */
+.topics{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:48px}
+.topics a{display:grid;grid-template-columns:96px 1fr auto;gap:20px;align-items:center;padding:18px 0;border-top:1px solid var(--line);text-decoration:none}
+.topics img{width:96px;height:72px;object-fit:cover;border-radius:14px;transition:transform .4s}
+.topics b{display:block;font-weight:500;font-size:19px;color:var(--ink)}
+.topics span{display:block;color:var(--soft);font-size:15.5px;line-height:1.5;margin-top:2px}
+.topics a::after{content:"→";color:var(--sand-d);font-size:18px;transition:transform .25s}
+.topics a:hover img{transform:scale(1.04)}
+.topics a:hover::after{transform:translateX(4px)}
+.after-topics{margin-top:36px}
+@media (max-width:860px){.topics{grid-template-columns:1fr}.topics a{grid-template-columns:78px 1fr auto;gap:16px}.topics img{width:78px;height:62px}}
+
+/* коуч-сессия: её фото и текст */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.split .ph{border-radius:var(--r);overflow:hidden;aspect-ratio:4/3}
+.split .ph img{width:100%;height:100%;object-fit:cover}
+.split h2{font-size:clamp(26px,3vw,36px);color:var(--plum);margin:0 0 18px}
+.split p{margin:0 0 14px;color:var(--ink)}
+@media (max-width:860px){.split{grid-template-columns:1fr;gap:28px}}
+
+/* удобный видеочат */
+.band{background:var(--blush)}
+.band .wrap{display:flex;align-items:center;justify-content:space-between;gap:36px}
+.band h2{font-size:clamp(26px,3vw,36px);color:var(--plum);margin:0 0 10px}
+.band p{margin:0;max-width:560px}
+@media (max-width:860px){.band .wrap{flex-direction:column;align-items:stretch}.band .btn{width:100%}}
+
+/* чем удобнее онлайн — её пункты, пронумерованы */
+.num{list-style:none;counter-reset:n;margin:40px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
+.num li{counter-increment:n;position:relative;padding:20px 0 20px 52px;border-top:1px solid var(--line)}
+.num li::before{content:counter(n,decimal-leading-zero);position:absolute;left:0;top:21px;font-size:14px;font-weight:600;letter-spacing:.06em;color:var(--sand-d)}
+.limits{margin-top:56px}
+.limits h3{font-size:22px;color:var(--plum);margin:0 0 6px}
+.dash{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
+.dash li{position:relative;padding:14px 0 14px 24px;border-top:1px solid var(--line);color:var(--soft)}
+.dash li::before{content:"–";position:absolute;left:2px;color:var(--sand-d)}
+@media (max-width:860px){.num,.dash{grid-template-columns:1fr}}
+
+/* большая ссылка */
+.bigl{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:28px 32px;border-radius:var(--r);background:var(--plum);color:#fff;text-decoration:none;font-size:clamp(20px,2.4vw,28px);font-weight:500;transition:background .25s}
+.bigl:hover{background:var(--plum-d)}
+.bigl i{width:52px;height:52px;border-radius:50%;background:var(--sand);color:var(--plum);display:grid;place-items:center;font-style:normal;flex:none}
+
+/* соцсети */
+.soc{display:flex;flex-wrap:wrap;gap:12px}
+.soc a{display:inline-flex;align-items:center;gap:10px;padding:10px 18px 10px 10px;border:1px solid var(--line);border-radius:999px;background:#fff;text-decoration:none;font-size:15px}
+.soc a i{width:34px;height:34px;border-radius:50%;background:var(--blush);display:grid;place-items:center;color:var(--plum)}
+
+/* внутренние страницы: её текст, чисто и спокойно */
+.page{padding-top:20px;padding-bottom:84px}
+.crumbs{font-size:14px;color:var(--soft);padding:26px 0 0}
+.crumbs a{text-decoration:none} .crumbs a:hover{color:var(--ink)}
+.page h1{font-size:clamp(32px,4.4vw,52px);color:var(--plum);margin:14px 0 30px}
+.cover{margin:0 0 36px;border-radius:var(--r);overflow:hidden;aspect-ratio:21/9;background:var(--blush)}
+.cover img{width:100%;height:100%;object-fit:cover}
+.prose{overflow-wrap:anywhere}
+.prose p{margin:0 0 20px}
+.prose h3{font-size:22px;color:var(--plum);margin:38px 0 12px}
+.prose ul{list-style:none;margin:0 0 26px;padding:0}
+.prose ul li{position:relative;padding:12px 0 12px 26px;border-top:1px solid var(--line)}
+.prose ul li:last-child{border-bottom:1px solid var(--line)}
+.prose ul li::before{content:"";position:absolute;left:2px;top:23px;width:7px;height:7px;border-radius:50%;background:var(--sand-d)}
+.prose ul.first{background:var(--blush);border-radius:var(--r);padding:16px 28px}
+.prose ul.first li{border-color:rgba(109,80,80,.13)} .prose ul.first li:last-child{border-bottom:0} .prose ul.first li:first-child{border-top:0}
+.prose figure{margin:8px 0 30px;border-radius:var(--r);overflow:hidden}
+.prose a{color:var(--plum)} .prose a.btn{color:#fff}
+.prose .cta{margin:36px 0 0}
+@media (max-width:860px){.cover{aspect-ratio:16/10}.prose ul.first{padding:8px 20px}}
+
+/* похожие темы: её фото, плавная лента */
+.rel{margin-top:64px}
+.rel h2{font-size:24px;color:var(--plum);margin:0 0 18px}
+.rel-row{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;scrollbar-width:thin}
+.rel-row a{scroll-snap-align:start;position:relative;display:block;border-radius:var(--r);overflow:hidden;aspect-ratio:4/5;text-decoration:none;color:#fff}
+.rel-row img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.rel-row a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(74,56,56,0) 40%,rgba(74,56,56,.78) 100%)}
+.rel-row div{position:absolute;left:18px;right:18px;bottom:16px;z-index:1;line-height:1.35}
+.rel-row b{display:block;font-weight:500;font-size:19px}
+.rel-row span{display:block;font-size:14px;opacity:.88;margin-top:4px}
+.rel-row a:hover img{transform:scale(1.05)}
+@media (max-width:860px){.rel-row{grid-auto-columns:72%}}
+
+/* вопросы */
+.faq details{border-top:1px solid var(--line)}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:22px 0;font-size:19px;font-weight:500;color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:24px;line-height:1;color:var(--sand-d);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details > div{padding:0 0 22px;color:var(--soft)}
+.faq details > div p{margin:0 0 10px}
+
+/* услуга: её описание, её варианты */
+.svc{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
+.buy{position:sticky;top:96px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:26px}
+.buy .ph{border-radius:16px;overflow:hidden;aspect-ratio:3/2;margin:0 0 20px}
+.buy .ph img{width:100%;height:100%;object-fit:cover}
+.opt{display:flex;justify-content:space-between;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;margin:0 0 10px;cursor:pointer;transition:border-color .2s, background .2s}
+.opt:has(input:checked){border-color:var(--plum);background:var(--blush)}
+.opt input{position:absolute;opacity:0}
+.opt b{font-weight:500}
+.buy .btn{width:100%;margin-top:8px}
+@media (max-width:860px){.svc{grid-template-columns:1fr}.buy{position:static}}
+
+/* дипломы */
+.docs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:0 0 36px}
+.docs img{border-radius:14px;border:1px solid var(--line)}
+@media (max-width:860px){.docs{grid-template-columns:1fr 1fr}}
+
+/* подвал: как у неё — ссылки, почта, соцсети, оплата */
+footer{background:var(--sand);color:var(--ink);padding:48px 0 34px;text-align:center}
+.flinks{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;font-size:14.5px}
+.flinks a{text-decoration:none} .flinks a:hover{text-decoration:underline}
+.fmail{display:inline-block;margin:18px 0 16px;font-size:15px}
+.fsoc{display:flex;justify-content:center;gap:10px;margin:0 0 22px}
+.fsoc a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.45);display:grid;place-items:center;color:var(--plum)}
+.fcopy{font-size:13px;color:#7a5f5f}
+.pay{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}
+.pay span{display:inline-grid;place-items:center;min-width:52px;height:30px;padding:0 9px;border-radius:6px;background:#fff;font-size:11px;font-weight:600;letter-spacing:.02em;color:#3b3b3b;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+
+/* блог */
+.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.posts a{text-decoration:none;display:block}
+.posts .ph{border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;margin:0 0 14px}
+.posts .ph img{width:100%;height:100%;object-fit:cover}
+.posts small{color:var(--soft);font-size:13.5px}
+.posts b{display:block;font-weight:500;font-size:20px;color:var(--plum);margin-top:4px}
+@media (max-width:860px){.posts{grid-template-columns:1fr}}
+
+.rise{opacity:0;transform:translateY(14px);transition:opacity .7s ease, transform .7s ease}
+.rise.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;transition:none}}
